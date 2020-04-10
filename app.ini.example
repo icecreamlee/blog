@@ -2,6 +2,7 @@
 env = dev
 port = 8000
 manage_password=admin
+categories=other,php,go,server
 [db]
 host = localhost
 port = 3306

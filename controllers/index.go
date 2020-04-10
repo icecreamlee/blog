@@ -11,10 +11,6 @@ import (
 	"time"
 )
 
-var types = map[int]string{1: "PHP", 2: "GO", 3: "前端", 4: "Other"}
-
-//var types = map[int]string{1: "Android", 2: "PHP", 3: "HTML5", 4: "JavaScript", 5: "iOS", 6: "Other"}
-
 // Index 首页&文章列表页
 func Index(c *gin.Context) {
 	_ = c.Request.ParseForm()
@@ -23,8 +19,9 @@ func Index(c *gin.Context) {
 	blogs[0].Content = string(template.HTML(blogs[0].Content))
 
 	c.HTML(200, "posts.html", gin.H{
-		"title": "首页",
-		"blogs": blogs,
+		"title":      "首页",
+		"blogs":      blogs,
+		"categories": configs.Categories,
 	})
 }
 
@@ -32,10 +29,16 @@ func Index(c *gin.Context) {
 func Article(c *gin.Context) {
 	id := goutils.ToInt(c.Param("id"))
 	blog := models.GetBlog(id, "*")
+	log.Println(configs.Categories)
+	category := configs.Categories[0]
+	if len(configs.Categories) > blog.Type {
+		category = configs.Categories[blog.Type]
+	}
 	c.HTML(200, "page.html", gin.H{
-		"title":   blog.Title,
-		"blog":    blog,
-		"content": template.HTML(blog.Content),
+		"title":    blog.Title,
+		"blog":     blog,
+		"category": category,
+		"content":  template.HTML(blog.Content),
 	})
 }
 
@@ -43,10 +46,11 @@ func Article(c *gin.Context) {
 func Manage(c *gin.Context) {
 	blogs := models.GetBlogList("*", 1, 100)
 	c.HTML(200, "manage.html", gin.H{
-		"title":    "管理",
-		"types":    types,
-		"blogs":    blogs,
-		"password": configs.ManagePassword,
+		"title":         "管理",
+		"blogs":         blogs,
+		"categories":    configs.Categories,
+		"categoriesLen": len(configs.Categories),
+		"password":      configs.ManagePassword,
 	})
 }
 
@@ -55,20 +59,20 @@ func Edit(c *gin.Context) {
 	id := goutils.ToInt(c.Param("id"))
 	blog := models.GetBlog(id, "*")
 	c.HTML(200, "edit.html", gin.H{
-		"title":   "编辑",
-		"blog":    blog,
-		"content": template.HTML(blog.Content),
-		"types":   types,
+		"title":      "编辑",
+		"blog":       blog,
+		"content":    template.HTML(blog.Content),
+		"categories": configs.Categories,
 	})
 }
 
 // Add 新增blog页
 func Add(c *gin.Context) {
 	c.HTML(200, "edit.html", gin.H{
-		"title":   "新增",
-		"blog":    models.Blog{},
-		"content": "",
-		"types":   types,
+		"title":      "新增",
+		"blog":       models.Blog{},
+		"content":    "",
+		"categories": configs.Categories,
 	})
 }
 

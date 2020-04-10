@@ -24,7 +24,7 @@
             <tbody>
             {{ range $index, $blog := .blogs}}
                 <tr>
-                    <td>{{$blog.Type}}</td>
+                    <td>{{if gt $.categoriesLen $blog.Type}}{{index $.categories $blog.Type}}{{end}}</td>
                     <td style="text-align: left"><a class="item_title edit_title" href="posts/{{$blog.ID}}?i=Icecream'?>">{{$blog.Title}}</a></td>
                     {{if $blog.Date.Valid}}
                         <td>{{$blog.Date.Time | dateFormat}}</td>

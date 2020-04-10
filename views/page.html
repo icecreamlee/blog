@@ -3,7 +3,7 @@
     <div class="view">
         <div class="view_title">{{.blog.Title}}</div>
         <div class="view_desc">
-            <div class="views group_views">{{.blog.Type}}</div>
+            <div class="views group_views">{{.category}}</div>
             {{if .blog.Date.Valid}}
             <div class="time cr_replies">{{.blog.Date.Time | dateFormat}}</div>
             {{end}}
