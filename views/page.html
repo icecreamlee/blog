@@ -1,0 +1,41 @@
+{{template "header" .}}
+<div class="content">
+    <div class="view">
+        <div class="view_title">{{.blog.Title}}</div>
+        <div class="view_desc">
+            <div class="views group_views">{{.blog.Type}}</div>
+            {{if .blog.Date.Valid}}
+            <div class="time cr_replies">{{.blog.Date.Time | dateFormat}}</div>
+            {{end}}
+        </div>
+        <div class="view_content">
+            <p>欢迎转载，但请务必在明确位置注明出处：<a href="/posts/{{.blog.ID}}">/posts/{{.blog.ID}}</a></p>
+            {{.content}}
+        </div>
+        <!-- 百度分享框 start -->
+        <div class="bdsharebuttonbox">
+            <a href="javascript:;" class="bds_more" data-cmd="more"></a>
+            <a href="javascript:;" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+            <a href="javascript:;" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="javascript:;" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+            <a href="javascript:;" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+            <a href="javascript:;" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        </div>
+        <!-- 百度分享框 end -->
+    </div>
+</div>
+{{template "footer"}}
+<script type="text/javascript" src="/static/js/prettify.js"></script>
+<link rel="stylesheet" href="/static/css/prettify.css"/>
+<script>
+    $(window).load(function () {
+        $("pre").addClass("prettyprint linenums");
+        prettyPrint();
+    })
+</script>
+<script>
+    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"{{.blog.Title}}　　—分享自Icecream","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},
+        "share":{},
+        "image":{"viewList":["mshare","tsina","qzone","sqq","weixin"],"viewText":"分享到：","viewSize":"16"},
+        "selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>

@@ -1,0 +1,14 @@
+{{template "header" .}}
+<div class="content">
+    {{ range $index, $blog := .blogs}}
+        <a class="item" href="/posts/{{$blog.ID}}" style="display: block">
+            <div class="item_title">{{$blog.Title}}</div>
+            <p>{{$blog.Content|stripTags|html}}</p>
+            <div class="item_info">
+                <span class="item_info_l group_views">{{$blog.Type}}</span>
+                <span class="item_info_r cr_replies"></span>
+            </div>
+        </a>
+    {{ end}}
+</div>
+{{template "footer"}}

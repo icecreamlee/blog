@@ -1,0 +1,28 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="author" content="Icecream"/>
+    <meta name="keywords" content="PHP，Android，Javascript，HTML5，Blog，编程，开发，博客"/>
+    <meta name="description" content="Android，PHP，前端开发博客。"/>
+    <title>{{.title}}</title>
+    <link rel="stylesheet" href="/static/css/reset.css"/>
+</head>
+<body>
+<div class="top">
+    <div class="logo"><a href="/">ICECREAM</a></div>
+    <ul class="menu">
+        <li><a href="/posts">Home</a></li>
+        <li><a href="/posts?type=1">Android</a></li>
+        <li><a href="/posts?type=2">PHP</a></li>
+        <li><a href="/posts?type=3">HTML5</a></li>
+        <li><a href="/message">Message</a></li>
+    </ul>
+</div>
+{{end}}

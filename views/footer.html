@@ -1,0 +1,22 @@
+{{define "footer"}}
+<div class="gototop" href="javascript:;" onclick="goToTop();">↑</div>
+<script src="/static/js/jquery.min.js" type="text/javascript"></script>
+<script>
+    var isShow = false;
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 200 && !isShow) {
+            $('.gototop').animate({bottom: '50px'}, 300);
+            isShow = true;
+        } else if ($(window).scrollTop() < 200 && isShow) {
+            $('.gototop').animate({bottom: '-50px'}, 300);
+            isShow = false;
+        }
+    });
+
+    function goToTop() {
+        $("html, body").animate({scrollTop: 0});
+    }
+</script>
+</body>
+</html>
+{{end}}
