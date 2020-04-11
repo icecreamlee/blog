@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"blog/configs"
-	"blog/models"
-	"database/sql"
+	"blog/internal/configs"
+	"blog/internal/helpers"
+	"blog/internal/models"
 	"github.com/IcecreamLee/goutils"
 	"github.com/gin-gonic/gin"
 	"html/template"
@@ -13,16 +13,21 @@ import (
 
 // Index 首页&文章列表页
 func Index(c *gin.Context) {
-	_ = c.Request.ParseForm()
-	page := goutils.ToInt(c.Request.Form.Get("page"))
-	blogs := models.GetBlogList("*", page, 20)
-	blogs[0].Content = string(template.HTML(blogs[0].Content))
-
-	c.HTML(200, "posts.html", gin.H{
-		"title":      "首页",
-		"blogs":      blogs,
-		"categories": configs.Categories,
-	})
+	page := goutils.ToInt(c.Query("page"))
+	category := goutils.ToInt(c.Query("type"))
+	limit := 20
+	if helpers.IsAjax(c.Request) {
+		blogs := models.GetBlogMapList(category, "id,title,type,date,content", page, limit)
+		c.JSON(200, blogs)
+	} else {
+		blogs := models.GetBlogList(category, "*", page, limit)
+		c.HTML(200, "posts.html", gin.H{
+			"title":         "首页",
+			"blogs":         blogs,
+			"categories":    configs.Categories,
+			"categoriesLen": len(configs.Categories),
+		})
+	}
 }
 
 // Article 文章页
@@ -39,12 +44,13 @@ func Article(c *gin.Context) {
 		"blog":     blog,
 		"category": category,
 		"content":  template.HTML(blog.Content),
+		"url":      helpers.GetURL(c.Request),
 	})
 }
 
 // Manage blog列表管理
 func Manage(c *gin.Context) {
-	blogs := models.GetBlogList("*", 1, 100)
+	blogs := models.GetBlogList(0, "*", 1, 100)
 	c.HTML(200, "manage.html", gin.H{
 		"title":         "管理",
 		"blogs":         blogs,
@@ -82,11 +88,11 @@ func AddEditSubmit(c *gin.Context) {
 	blog := models.Blog{
 		ID:       id,
 		Title:    c.PostForm("title"),
-		Date:     sql.NullTime{Time: time.Now()},
+		Date:     time.Now(),
 		Content:  c.PostForm("content"),
 		Type:     goutils.ToInt(c.PostForm("type")),
-		AddAt:    goutils.IntDatetime(),
-		UpdateAt: goutils.IntDatetime(),
+		AddAt:    time.Now(),
+		UpdateAt: time.Now(),
 	}
 
 	models.ORM.ShowSQL(true)

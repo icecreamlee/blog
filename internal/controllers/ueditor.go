@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"blog/core"
+	"blog/internal/core"
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"

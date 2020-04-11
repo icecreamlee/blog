@@ -1,7 +1,7 @@
 package models
 
 import (
-	"blog/configs"
+	"blog/internal/configs"
 	"github.com/IcecreamLee/goutils"
 	_ "github.com/go-sql-driver/mysql"
 	"strings"

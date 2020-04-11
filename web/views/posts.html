@@ -1,0 +1,40 @@
+{{template "header" .}}
+<div id="list" class="content">
+    {{ range $index, $blog := .blogs}}
+        <a class="item" href="/posts/{{$blog.ID}}" style="display: block">
+            <div class="item_title">{{$blog.Title}}</div>
+            <p class="item-content">{{$blog.Content|stripTags|html}}</p>
+            <div class="item_info">
+                <span class="item_info_l group_views">{{if gt $.categoriesLen $blog.Type}}{{index $.categories $blog.Type}}{{else}}{{index $.categories 0}}{{end}}</span>
+                <span class="item_info_r cr_replies">{{$blog.Date | dateFormat}}</span>
+            </div>
+        </a>
+    {{ end}}
+</div>
+{{template "footer"}}
+<script>
+    var page = 1;
+    var isPulled = false;
+    $(window).scroll(function(){
+        if (isPulled) {
+            return;
+        }
+        if($(this).scrollTop() + $(this).height() === $(document).height()){
+            $.get("/posts", {page:++page}, function (r) {
+                if (!r || typeof r !== "object") {
+                    isPulled = true;
+                    return;
+                }
+                r.forEach(function (item) {
+                    var newItem = $("#list .item").eq(0).attr('href', '/posts/' + item.id);
+                    newItem.find('.item_title').text(item.title);
+                    newItem.find('.item-content').text(item.content);
+                    newItem.find('.item_info_l').text(item.type);
+                    newItem.find('.item_info_r').text(item.date.substr(0, 10));
+                    $("#list").append(newItem.prop("outerHTML"))
+                });
+
+            })
+        }
+    });
+</script>

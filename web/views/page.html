@@ -4,12 +4,10 @@
         <div class="view_title">{{.blog.Title}}</div>
         <div class="view_desc">
             <div class="views group_views">{{.category}}</div>
-            {{if .blog.Date.Valid}}
-            <div class="time cr_replies">{{.blog.Date.Time | dateFormat}}</div>
-            {{end}}
+            <div class="time cr_replies">{{.blog.Date | dateFormat}}</div>
         </div>
         <div class="view_content">
-            <p>欢迎转载，但请务必在明确位置注明出处：<a href="/posts/{{.blog.ID}}">/posts/{{.blog.ID}}</a></p>
+            <p>欢迎转载，但请务必在明确位置注明出处：<a href="{{.url}}">{{.url}}</a></p>
             {{.content}}
         </div>
         <!-- 百度分享框 start -->
