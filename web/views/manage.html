@@ -26,16 +26,8 @@
                 <tr>
                     <td>{{if gt $.categoriesLen $blog.Type}}{{index $.categories $blog.Type}}{{else}}{{index $.categories 0}}{{end}}</td>
                     <td style="text-align: left"><a class="item_title edit_title" href="posts/{{$blog.ID}}?i=Icecream'?>">{{$blog.Title}}</a></td>
-                    {{if $blog.Date.Valid}}
-                        <td>{{$blog.Date.Time | dateFormat}}</td>
-                    {{else}}
-                        <td>/</td>
-                    {{end}}
-                    {{if gt $blog.UpdateAt 0}}
-                        <td>{{$blog.UpdateAt | int2datetime}}</td>
-                    {{else}}
-                        <td>/</td>
-                    {{end}}
+                    <td>{{$blog.Date | dateFormat}}</td>
+                    <td>{{$blog.UpdateAt | dateFormat}}</td>
                     <td>{{$blog.Views}}</td>
                     <td>
                         <a href="edit/{{$blog.ID}}?i={{$.password}}">编辑</a>&nbsp;

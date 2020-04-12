@@ -26,12 +26,12 @@
                     return;
                 }
                 r.forEach(function (item) {
-                    var newItem = $("#list .item").eq(0).attr('href', '/posts/' + item.id);
+                    var newItem = $($("#list .item").eq(0).prop("outerHTML")).attr('href', '/posts/' + item.id);
                     newItem.find('.item_title').text(item.title);
                     newItem.find('.item-content').text(item.content);
                     newItem.find('.item_info_l').text(item.type);
                     newItem.find('.item_info_r').text(item.date.substr(0, 10));
-                    $("#list").append(newItem.prop("outerHTML"))
+                    $("#list").append(newItem)
                 });
 
             })

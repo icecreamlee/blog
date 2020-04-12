@@ -12,7 +12,7 @@
 </style>
 <div class="content">
     <form method="post">
-        <select class="content_type" name="">
+        <select class="content_type" name="type">
             {{ range $index, $type := .categories}}
                 <option value="{{$index}}" {{if eq $.blog.Type $index}}selected{{end}}>{{$type}}</option>
             {{end}}

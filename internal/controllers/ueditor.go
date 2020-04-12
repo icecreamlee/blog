@@ -21,8 +21,8 @@ func UEditor(c *gin.Context) {
 		return
 	case "uploadimage":
 		c.Header("Content-type", "application/json; charset=utf-8")
-		result := upload(core.BasePath+"statics/ueditor/upload/image/", c.Request)
-		result["url"] = "/static" + strings.TrimPrefix(result["url"], core.BasePath+"statics")
+		result := upload(core.RootPath+"web/statics/ueditor/upload/image/", c.Request)
+		result["url"] = "/static" + strings.TrimPrefix(result["url"], core.RootPath+"web/statics")
 		c.JSON(200, result)
 		return
 	}

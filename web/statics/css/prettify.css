@@ -114,6 +114,7 @@ pre.prettyprint {
     padding: 2px;
     border: 1px solid #f0f0f0;
     border-radius: 2px;
+    font-family: Monaco, 'Andale Mono', 'Ubuntu Mono', monospace, Consolas;
 }
 
 /* Specify class=linenums on a pre to get line numbering */

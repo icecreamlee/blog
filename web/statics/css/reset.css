@@ -9,7 +9,7 @@
 html {
     max-width: 100%;
     height: auto;
-    font-family: PingFang SC,Helvetica Neue,Hiragino Sans GB,Segoe UI,Microsoft YaHei,微软雅黑,sans-serif
+    font-family: Georgia,serif,sans-serif;
 }
 
 body {
@@ -107,7 +107,7 @@ img, table {
     font-size: 24px;
     line-height: 50px;
     color: #FFF;
-    font-family: Small Fonts,PingFang SC,Helvetica Neue,Hiragino Sans GB,Segoe UI,Microsoft YaHei,微软雅黑,sans-serif;
+    font-family: Georgia,serif,sans-serif;
 }
 
 .logo a:hover {
@@ -230,6 +230,9 @@ img, table {
     padding: 10px 15px;
     line-height: 1.8em;
 }
+.view_content h1 {margin: 20px 0;}
+.view_content h2,.view_content h3 {margin: 10px 0;}
+.view_content h4,.view_content h5 {margin: 6px 0;}
 
 .view_content p {
     font-size: 16px;
@@ -358,7 +361,7 @@ img, table {
     /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
     .logo {
         margin: 0;
-        padding-top: 12px;
+        padding: 12px 0;
         width: 100%;
         text-align: center;
     }
@@ -368,7 +371,7 @@ img, table {
         font-size: 18px;
         line-height: 18px;
         color: #FFF;
-        font-family: Small Fonts,PingFang SC,Helvetica Neue,Hiragino Sans GB,Segoe UI,Microsoft YaHei,微软雅黑,sans-serif;
+        font-family: Georgia,serif,sans-serif;
     }
 
     .logo a:hover {

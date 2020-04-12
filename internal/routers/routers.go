@@ -12,6 +12,7 @@ func SetRouters(r *gin.Engine) {
 	r.GET("/posts/:id", controllers.Article)
 	r.GET("/manage", controllers.ManagePermissionValidation, controllers.Manage)
 	r.GET("/add", controllers.ManagePermissionValidation, controllers.Add)
+	r.POST("/add", controllers.ManagePermissionValidation, controllers.AddEditSubmit)
 	r.GET("/edit/:id", controllers.ManagePermissionValidation, controllers.Edit)
 	r.POST("/edit/:id", controllers.ManagePermissionValidation, controllers.AddEditSubmit)
 	r.GET("/del/:id", controllers.ManagePermissionValidation, controllers.Del)
