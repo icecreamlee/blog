@@ -34,7 +34,7 @@ func Index(c *gin.Context) {
 func Article(c *gin.Context) {
 	id := goutils.ToInt(c.Param("id"))
 	blog := models.GetBlog(id, "*")
-	log.Println(configs.Categories)
+	models.AddBlogViews(id)
 	category := configs.Categories[0]
 	if len(configs.Categories) > blog.Type {
 		category = configs.Categories[blog.Type]

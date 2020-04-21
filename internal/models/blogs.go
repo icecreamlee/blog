@@ -31,6 +31,12 @@ func GetBlog(id int, selects string) Blog {
 	return blog
 }
 
+// AddBlogViews 更新blog阅读量+1
+func AddBlogViews(id int) {
+	s := "update blog set views = views + 1 where id = ?"
+	_, _ = ORM.Exec(s, id)
+}
+
 // GetBlog 返回当前页page的blog列表数据
 func GetBlogList(category int, selects string, page int, limit int) []Blog {
 	s := getBlogList(category, selects, page, limit)
